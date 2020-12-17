@@ -14,6 +14,7 @@ Docker Image for Microservice Development, Testing and Orchestration
 * yq
 * golang
 * html2text
+* dotnet
 
 ## Database Dev
 * mysql client

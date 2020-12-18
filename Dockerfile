@@ -56,6 +56,9 @@ RUN \
 
 ENV PATH /root/.dotnet:$PATH
 
+# install: vscode server
+RUN curl -fsSL https://code-server.dev/install.sh | sh
+
 # install: go
 ENV GOROOT /usr/lib/go
 ENV GOPATH /go

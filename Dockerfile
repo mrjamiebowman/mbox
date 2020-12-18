@@ -18,18 +18,20 @@ RUN apk add --no-cache bash
 # install: app dev
 RUN \
     apk add --no-cache \
-        git \
-        less \
-        openssh \
         curl \
-        httpie \
-        wget \
-        jq \
-        yq \
-        vim \
+        git \
+        gcc \
+        go \
         html2text \
+        httpie \
+        jq \
+        less \
         make \
-        musl-dev
+        musl-dev \
+        openssh \       
+        wget \        
+        yq \
+        vim
 
 # install: dotnet
 RUN \ 
@@ -40,7 +42,7 @@ RUN \
 
 ENV PATH /root/.dotnet:$PATH
 
-# configure: go
+# install: go
 ENV GOROOT /usr/lib/go
 ENV GOPATH /go
 ENV PATH /go/bin:$PATH

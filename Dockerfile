@@ -12,6 +12,9 @@ ENV	JMETER_DOWNLOAD_URL https://archive.apache.org/dist/jmeter/binaries/apache-j
 RUN apk update
 WORKDIR /root
 
+# bashrc
+COPY .bashrc .
+
 # copy setup scripts
 COPY mbox-setup.sh .
 RUN chmod +x mbox-setup.sh
@@ -78,7 +81,9 @@ RUN \
 
 # kubectl
 RUN \
-    curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+    curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"  && \
+    chmod +x kubectl && \
+    mv kubectl /usr/local/bin/
 
 # helm
 RUN \

@@ -1,1 +1,1 @@
-docker run -it --rm --name mbox -v mbox:/mbox -v work:/work -v %USERPROFILE%/.kube:/root/.kube mrjamiebowman/mbox /bin/bash
+docker run -it --rm --name mbox -v mbox:/mbox -v work:/work -v $env:userprofile/.kube:/root/.kube mrjamiebowman/mbox /bin/bash

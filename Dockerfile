@@ -95,6 +95,11 @@ RUN \
     ./mbox-setup.sh "kubectx" "https://api.github.com/repos/ahmetb/kubectx/releases/latest" "kubectx_.*_linux_x86_64.tar.gz" && \
     ./mbox-setup.sh "kubens" "https://api.github.com/repos/ahmetb/kubectx/releases/latest" "kubens_.*_linux_x86_64.tar.gz"
 
+RUN \
+    curl -Lo ./kind "https://kind.sigs.k8s.io/dl/v0.9.0/kind-$(uname)-amd64" && \
+    chmod +x ./kind && \
+    mv ./kind /usr/local/bin/kind
+
 # install: kafka related
 
 # path variable

@@ -14,6 +14,7 @@ WORKDIR /root
 
 # copy setup scripts
 COPY mbox-setup.sh .
+RUN chmod +x mbox-setup.sh
 
 # setup bash
 RUN apk add --no-cache bash
@@ -77,11 +78,9 @@ RUN \
     curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.6.8 TARGET_ARCH=x86_64 sh -
 
 # kubectx / kubens
-RUN \ 
-    curl -s https://api.github.com/repos/ahmetb/kubectx/releases/latest \
-    | grep -i "(kubens_.*_linux_x86_64.tar.gz)\"$" \
-    | cut -d '"' -f 4 \
-    | wget -qi -
+RUN \
+    ./mbox-setup.sh "kubectx" "https://api.github.com/repos/ahmetb/kubectx/releases/latest" "kubectx_.*_linux_x86_64.tar.gz" && \
+    ./mbox-setup.sh "kubens" "https://api.github.com/repos/ahmetb/kubectx/releases/latest" "kubens_.*_linux_x86_64.tar.gz"
 
 # install: kafka related
 

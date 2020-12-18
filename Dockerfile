@@ -4,10 +4,14 @@ LABEL maintainer Jamie Bowman <mrjamiebowman@protonmail.com>
 # env variables
 ARG TZ="America/New_York"
 
+# env: jmeter
 ARG JMETER_VERSION="5.3"
 ENV JMETER_HOME /opt/apache-jmeter-${JMETER_VERSION}
 ENV	JMETER_BIN	${JMETER_HOME}/bin
 ENV	JMETER_DOWNLOAD_URL https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-${JMETER_VERSION}.tgz
+
+# env: isitio
+ARG ISTIO_VERSION="1.6.8"
 
 RUN apk update
 WORKDIR /root
@@ -97,7 +101,9 @@ ENV PATH /root/.linkerd2/bin:$PATH
 
 # istio
 RUN \
-    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.6.8 TARGET_ARCH=x86_64 sh -
+    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=${ISTIO_VERSION} TARGET_ARCH=x86_64 sh - && \
+    chmod +x istio-${ISTIO_VERSION}/bin/istioctl && \
+    mv istio-${ISTIO_VERSION}/bin/istioctl /usr/local/bin/istio
 
 # kubectx / kubens
 RUN \

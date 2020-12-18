@@ -13,11 +13,13 @@ ENV	JMETER_DOWNLOAD_URL https://archive.apache.org/dist/jmeter/binaries/apache-j
 # env: isitio
 ARG ISTIO_VERSION="1.6.8"
 
+# build
 RUN apk update
 WORKDIR /root
 
 # bashrc
 COPY .bashrc .
+COPY .bash_aliases .
 
 # copy setup scripts
 COPY mbox-setup.sh .

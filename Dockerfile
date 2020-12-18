@@ -32,8 +32,9 @@ RUN \
         less \
         make \
         musl-dev \
-        openssh \       
-        wget \        
+        openssh \
+        openssl \
+        wget \
         yq \
         vim
 
@@ -69,9 +70,21 @@ RUN \
 ENV PATH /opt/apache-jmeter-${JMETER_VERSION}/bin:$PATH
 
 # install: networking
-RUN apk --no-cache add socat
+RUN apk add --no-cache socat
 
 # install: containerization
+RUN \
+    apk add --no-cache docker docker-compose
+
+# helm
+RUN \
+    curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 && \
+    chmod 700 get_helm.sh && \
+    ./get_helm.sh
+
+# linkerd
+RUN curl -sL https://run.linkerd.io/install | sh
+ENV PATH /root/.linkerd2/bin:$PATH
 
 # istio
 RUN \

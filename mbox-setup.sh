@@ -7,14 +7,20 @@ APP_NAME=$1
 URL=$2
 FILEREGEX=$3
 
-# download
+# env setup
+mkdir -p ./downloads
+mkdir -p ./downloads/$APP_NAME
+
 echo "Download/Setup Tool: $APP_NAME"
 DOWNLOAD_FILE=$(curl -s "$URL" | grep -i "$FILEREGEX\"$" | cut -d '"' -f 4)
 TARBALL="$(basename -- $DOWNLOAD_FILE)"
 echo "Downloading: $DOWNLOAD_FILE"
 echo "File Name: $TARBALL"
-curl -Lo $TARBALL $DOWNLOAD_FILE
-rm $TARBALL
-tar -xzf $TARBALL
-chmod +x $APP_NAME
-mv $APP_NAME /usr/local/bin/
+
+# download
+curl -Lo ./downloads/$TARBALL $DOWNLOAD_FILE
+
+# extract and install into /usr/local/bin
+tar -xzf ./downloads/$TARBALL -C ./downloads/$APP_NAME
+chmod +x ./downloads/$APP_NAME/$APP_NAME
+mv ./downloads/$APP_NAME/$APP_NAME /usr/local/bin/

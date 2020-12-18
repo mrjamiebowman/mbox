@@ -12,6 +12,9 @@ ENV	JMETER_DOWNLOAD_URL https://archive.apache.org/dist/jmeter/binaries/apache-j
 RUN apk update
 WORKDIR /root
 
+# copy setup scripts
+COPY mbox-setup.sh .
+
 # setup bash
 RUN apk add --no-cache bash
 
@@ -68,6 +71,17 @@ ENV PATH /opt/apache-jmeter-${JMETER_VERSION}/bin:$PATH
 RUN apk --no-cache add socat
 
 # install: containerization
+
+# istio
+RUN \
+    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.6.8 TARGET_ARCH=x86_64 sh -
+
+# kubectx / kubens
+RUN \ 
+    curl -s https://api.github.com/repos/ahmetb/kubectx/releases/latest \
+    | grep -i "(kubens_.*_linux_x86_64.tar.gz)\"$" \
+    | cut -d '"' -f 4 \
+    | wget -qi -
 
 # install: kafka related
 

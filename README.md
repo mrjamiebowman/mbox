@@ -43,7 +43,7 @@ helm (latest release: https://github.com/helm/helm/releases/latest)
 helm-diff (latest commit)
 helm-unittest (latest commit)
 
-## kafka
+## Kafka
 
 ## Security
 * nikto

@@ -1,14 +1,44 @@
 FROM alpine:edge
 LABEL maintainer Jamie Bowman <mrjamiebowman@protonmail.com>
 
+# env variables
+ARG TZ="America/New_York"
+
+ARG JMETER_VERSION="5.3"
+ENV JMETER_HOME /opt/apache-jmeter-${JMETER_VERSION}
+ENV	JMETER_BIN	${JMETER_HOME}/bin
+ENV	JMETER_DOWNLOAD_URL https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-${JMETER_VERSION}.tgz
+
 RUN apk update
+WORKDIR /root
+
+# setup bash
+RUN apk add --no-cache bash
 
 # install: app dev
-RUN apk add git less openssh curl wget jq yq vim html2text make musl-dev go && \
-    rm -rf /var/lib/apt/lists/* && \
-    rm /var/cache/apk/*
+RUN \
+    apk add --no-cache \
+        git \
+        less \
+        openssh \
+        curl \
+        httpie \
+        wget \
+        jq \
+        yq \
+        vim \
+        html2text \
+        make \
+        musl-dev
 
 # install: dotnet
+RUN \ 
+    curl -Lo dotnet-install.sh https://dot.net/v1/dotnet-install.sh && \
+    chmod +x dotnet-install.sh && \
+    ./dotnet-install.sh -c 5.0 && \
+    export DOTNET_ROOT=/root/.dotnet
+
+ENV PATH /root/.dotnet:$PATH
 
 # configure: go
 ENV GOROOT /usr/lib/go
@@ -17,22 +47,28 @@ ENV PATH /go/bin:$PATH
 
 RUN mkdir -p ${GOPATH}/src ${GOPATH}/bin
 
-# Install Glide
-RUN go get -u github.com/Masterminds/glide/...
-
-RUN apk update
-
-RUN apk add --update --no-cache py-pip && \
-    pip3 install --upgrade pip setuptools httpie && \
+# install: glide
+RUN apk add --no-cache py-pip && \
+    pip3 install --upgrade pip setuptools && \
     rm -r /root/.cache
 
+# install: jmeter
+RUN \
+    mkdir -p /opt && \
+    mkdir -p /tmp/jmeter && \
+    curl -Lo /tmp/jmeter/apache-jmeter-${JMETER_VERSION}.tgz ${JMETER_DOWNLOAD_URL} && \
+	tar -xzf /tmp/jmeter/apache-jmeter-${JMETER_VERSION}.tgz -C /opt && \
+	rm -rf /tmp/jmeter
+
+ENV PATH /opt/apache-jmeter-${JMETER_VERSION}/bin:$PATH
 
 # install: networking
 RUN apk --no-cache add socat
 
-
 # install: containerization
 
 # install: kafka related
+
+# path variable
 
 WORKDIR /work

@@ -1,5 +1,5 @@
-# MBox: Microservice Toolbox
-Docker Image for Microservice Development, Testing and Orchestration
+# Microservice Toolbox (MBOX)
+Alpine Docker Image for Microservice Development, Testing and Orchestration
 
 ## Tools Installed
 

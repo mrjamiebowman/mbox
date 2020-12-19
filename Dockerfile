@@ -31,6 +31,7 @@ RUN apk add --no-cache bash
 # install: app dev
 RUN \
     apk add --no-cache \
+        ansible \
         ca-certificates \
         coreutils \
         curl \
@@ -46,11 +47,13 @@ RUN \
         less \
         make \
         musl-dev \
+        mysql \
         nikto \
         openssh \
         openssl \
         rsync \
         socat \
+        terraform \
         wget \
         yq \
         vim

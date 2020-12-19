@@ -20,7 +20,7 @@ Alpine Docker Image for Microservice Development, Testing and Orchestration
 * python 3
 * dotnet
 
-## CLoud
+## Cloud
 * doctl - Digital Ocean
 
 ## Database Dev

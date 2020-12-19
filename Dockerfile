@@ -17,6 +17,9 @@ ENV	JMETER_DOWNLOAD_URL https://archive.apache.org/dist/jmeter/binaries/apache-j
 ARG MSSQL_VERSION=17.5.2.1-1
 ENV MSSQL_VERSION=${MSSQL_VERSION}
 
+# env: doctl version
+ARG DOCTL_VERSION="1.54.0"
+
 # build
 RUN apk update
 WORKDIR /root
@@ -86,7 +89,7 @@ RUN apk add --no-cache py-pip && \
     rm -r /root/.cache
 
 # install: doctl
-#RUN curl -sL https://github.com/digitalocean/doctl/releases/download/v<version>/doctl-<version>-linux-amd64.tar.gz | tar -xzv && \
+RUN curl -L https://github.com/digitalocean/doctl/releases/download/v${DOCTL_VERSION}/doctl-${DOCTL_VERSION}-linux-amd64.tar.gz | tar -xzv && mv ~/doctl /usr/local/bin
 
 # install: jmeter
 RUN \

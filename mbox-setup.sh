@@ -1,19 +1,22 @@
 #!/bin/bash
 
-# ./mbox-setup.sh "kubens" "https://api.github.com/repos/ahmetb/kubectx/releases/latest" "kubens_.*_linux_x86_64.tar.gz"
-
 # variables
 APP_NAME=$1
 URL=$2
 FILEREGEX=$3
 
+# sample use
+# ./mbox-setup.sh "kubens" "https://api.github.com/repos/ahmetb/kubectx/releases/latest" "kubens_.*_linux_x86_64.tar.gz"
+
+echo "Download/Setup Tool: $APP_NAME"
+
 # env setup
 mkdir -p ./downloads
 mkdir -p ./downloads/$APP_NAME
 
-echo "Download/Setup Tool: $APP_NAME"
 DOWNLOAD_FILE=$(curl -s "$URL" | grep -i "$FILEREGEX\"$" | cut -d '"' -f 4)
 TARBALL="$(basename -- $DOWNLOAD_FILE)"
+
 echo "Downloading: $DOWNLOAD_FILE"
 echo "File Name: $TARBALL"
 

@@ -31,7 +31,12 @@ RUN apk add --no-cache bash
 # install: app dev
 RUN \
     apk add --no-cache \
+        ca-certificates \
+        coreutils \
         curl \
+        docker \
+        docker-compose \
+        libc6-compat \
         git \
         gcc \
         go \
@@ -41,8 +46,11 @@ RUN \
         less \
         make \
         musl-dev \
+        nikto \
         openssh \
         openssl \
+        rsync \
+        socat \
         wget \
         yq \
         vim
@@ -63,13 +71,15 @@ RUN curl -fsSL https://code-server.dev/install.sh | sh
 ENV GOROOT /usr/lib/go
 ENV GOPATH /go
 ENV PATH /go/bin:$PATH
-
 RUN mkdir -p ${GOPATH}/src ${GOPATH}/bin
 
 # install: glide
 RUN apk add --no-cache py-pip && \
     pip3 install --upgrade pip setuptools && \
     rm -r /root/.cache
+
+# install: doctl
+#RUN curl -sL https://github.com/digitalocean/doctl/releases/download/v<version>/doctl-<version>-linux-amd64.tar.gz | tar -xzv && \
 
 # install: jmeter
 RUN \
@@ -80,13 +90,6 @@ RUN \
 	rm -rf /tmp/jmeter
 
 ENV PATH /opt/apache-jmeter-${JMETER_VERSION}/bin:$PATH
-
-# install: networking
-RUN apk add --no-cache socat
-
-# install: containerization
-RUN \
-    apk add --no-cache docker docker-compose
 
 # kubectl
 RUN \
@@ -114,7 +117,7 @@ RUN \
 RUN \
     ./mbox-setup.sh "kubectx" "https://api.github.com/repos/ahmetb/kubectx/releases/latest" "kubectx_.*_linux_x86_64.tar.gz" && \
     ./mbox-setup.sh "kubens" "https://api.github.com/repos/ahmetb/kubectx/releases/latest" "kubens_.*_linux_x86_64.tar.gz"
-
+    
 RUN \
     curl -Lo ./kind "https://kind.sigs.k8s.io/dl/v0.9.0/kind-$(uname)-amd64" && \
     chmod +x ./kind && \

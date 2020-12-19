@@ -4,6 +4,7 @@ Alpine Docker Image for Microservice Development, Testing and Orchestration
 ## Tools Installed
 
 ## App Dev
+* libc6-compat
 * git
 * vim
 * jmeter
@@ -12,9 +13,15 @@ Alpine Docker Image for Microservice Development, Testing and Orchestration
 * jq
 * wget
 * yq
-* golang
 * html2text
+
+## Programming Languages
+* golang
+* python 3
 * dotnet
+
+## CLoud
+* doctl - Digital Ocean
 
 ## Database Dev
 * mysql client
@@ -26,12 +33,13 @@ Alpine Docker Image for Microservice Development, Testing and Orchestration
 
 ## Containerization
 * Docker
+* docker-compose
 * kubectl
 * kubens
 * kubectx
-* docker-compose
-* traefik
 * kustomize
+* Istio
+* LinkerD
 
 ## Infrastructure as Code
 * terraform

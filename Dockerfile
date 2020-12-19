@@ -55,9 +55,13 @@ RUN \
         make \
         musl-dev \
         mysql \
+        netcat-openbsd \
+        nodejs \
+        npm \
         nikto \
         openssh \
         openssl \
+        python3 \
         rsync \
         socat \
         terraform \

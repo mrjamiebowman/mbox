@@ -58,3 +58,10 @@ helm-unittest (latest commit)
 
 ## Tools
 * rsync
+
+
+## Scripts
+
+
+#### Python3 Web Server Oneliner
+`docker run -it --rm --name mbox --hostname mbox -p 8080:8080 mrjamiebowman/mbox python3 -m http.server 8080`

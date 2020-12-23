@@ -32,6 +32,10 @@ COPY .bash_aliases .
 COPY mbox-setup.sh .
 RUN chmod +x mbox-setup.sh
 
+# mbox docs / scripts
+RUN mkdir -p /mbox/docs /mbox/scripts
+COPY mbox /.
+
 # setup bash
 RUN apk add --no-cache bash
 

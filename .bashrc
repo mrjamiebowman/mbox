@@ -20,13 +20,13 @@ shopt -s checkwinsize
 PS1="\[\033[1;31m\]\u\[\033[1;33m\]@\[\033[1;34m\]mbox \[\033[1;36m\]\W\[\033[1;0m\] $ "
 
 # enable color support of ls and also add handy aliases
-alias ls='ls --color=auto'
-alias dir='dir --color=auto'
-alias vdir='vdir --color=auto'
+# alias ls='ls --color=auto'
+# alias dir='dir --color=auto'
+# alias vdir='vdir --color=auto'
 
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+# alias grep='grep --color=auto'
+# alias fgrep='fgrep --color=auto'
+# alias egrep='egrep --color=auto'
 
 # some more ls aliases
 alias ll='ls -alF'

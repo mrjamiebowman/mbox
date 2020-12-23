@@ -1,1 +1,1 @@
-docker cp mbox-setup.sh mbox:/root/mbox-setup.sh
+docker cp .bashrc mbox:/root/.bashrc

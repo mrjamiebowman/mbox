@@ -19,21 +19,21 @@ ENV MSSQL_VERSION=${MSSQL_VERSION}
 
 # mbox folder (documentation, scripts)
 RUN mkdir -p /mbox
-WORKDIR /mbox
-COPY ./mbox/* .
+WORKDIR /mbox/
+COPY mbox/* /mbox/.
 COPY README.md /mbox/.
 
 # build
 RUN apk update
-WORKDIR /root
 
-# bashrc
-COPY .bashrc .
-COPY .bash_aliases .
+# root folder
+WORKDIR /root
+COPY root/.bashrc .
+COPY root/.bash_aliases .
 
 # copy setup scripts
-COPY mbox-setup.sh .
-RUN chmod +x mbox-setup.sh
+COPY root/setup.sh .
+RUN chmod +x setup.sh
 
 # mbox docs / scripts
 RUN mkdir -p /mbox/docs /mbox/scripts
@@ -138,8 +138,8 @@ RUN \
 
 # kubectx / kubens
 # RUN \
-#     ./mbox-setup.sh "kubectx" "https://api.github.com/repos/ahmetb/kubectx/releases/latest" "kubectx_.*_linux_x86_64.tar.gz" && \
-#     ./mbox-setup.sh "kubens" "https://api.github.com/repos/ahmetb/kubectx/releases/latest" "kubens_.*_linux_x86_64.tar.gz"
+#     ./setup.sh "kubectx" "https://api.github.com/repos/ahmetb/kubectx/releases/latest" "kubectx_.*_linux_x86_64.tar.gz" && \
+#     ./setup.sh "kubens" "https://api.github.com/repos/ahmetb/kubectx/releases/latest" "kubens_.*_linux_x86_64.tar.gz"
 
 RUN \
     curl -Lo ./kind "https://kind.sigs.k8s.io/dl/v0.9.0/kind-$(uname)-amd64" && \

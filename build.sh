@@ -3,8 +3,6 @@
 # secret enviroment variables in Travis CI
 # DOCKER_USERNAME
 # DOCKER_PASSWORD
-# GITHUB_NAME
-# GITHUB_TOKEN
 
 image="mrjamiebowman/mbox"
 
